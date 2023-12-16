@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TestTable from "../Table/TestTable";
 import styles from "../style/style.module.css";
+import TestType from "../Table/TestType";
 
 const CreateForm = () => {
   const [inptTxt, setInptTxt] = useState({
@@ -10,11 +11,15 @@ const CreateForm = () => {
     Tester_mobile_no: "",
     Alternative_no: "",
     type: "",
-    currDate: "",
+    currDate: new Date().toLocaleString("en-GB"),
   });
   const [selectList, setSelectList] = useState("");
+
   const [tableData, setTableData] = useState([]);
 
+  const [testTypeData, setTestTypeData] = useState([]);
+
+  //for handling the test-name
   const handleFormInput = (e) => {
     //for checking character should not be digit
     let { name, value } = e.target;
@@ -24,18 +29,17 @@ const CreateForm = () => {
     }
   };
 
+  //for handling the test-type
   const handleSelectInpt = (e) => {
     setSelectList(e.target.value);
-    // console.log(e.target.value);
-    // setInptTxt({ ...inptTxt, New_test: e.target.value });
     setInptTxt({ ...inptTxt, type: e.target.value });
   };
 
+  //for creating the new test-type
   const handleCreateNewTest = () => {
     document.querySelectorAll("option").forEach((ele) => {
       if (inptTxt.New_test.toLowerCase() === ele.textContent.toLowerCase()) {
         alert(`${ele.textContent} already exists!`);
-        // setInptTxt({ ...inptTxt, New_test: "" });
       }
     });
 
@@ -53,12 +57,12 @@ const CreateForm = () => {
         type: inptTxt.New_test,
       });
     }
-    console.log(selectList);
+    // console.log(selectList);
   };
 
+  //validating the form input of tester....
   const handleFormInput1 = (e) => {
     const { name, value } = e.target;
-    // console.log(name, value);
 
     if (
       (name === "Tester_mobile_no" && value >= 0 && value.length != 11) ||
@@ -71,6 +75,7 @@ const CreateForm = () => {
     }
   };
 
+  //handling the form submission
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -87,19 +92,21 @@ const CreateForm = () => {
     } else if (inptTxt.Alternative_no === inptTxt.Tester_mobile_no) {
       alert("Alternate number can't be same as mobile number!");
     } else {
-      setInptTxt({ ...inptTxt, currDate: `${new Date().toDateString()}` });
       setTableData([...tableData, inptTxt]);
+      setTestTypeData([...testTypeData, inptTxt]);
     }
   };
 
+  //deleting the items from the php-test-mast table
   const deleteItems = (item) => {
-    console.log(item);
+    // console.log(item);
     const newArray = tableData.filter((el, i) => i != item);
     setTableData(newArray);
   };
 
   return (
     <>
+      <h1 className={styles.heading}>Form</h1>
       <div className={styles.parentDiv}>
         <label className={styles.label}>Test Name:-</label>
         <input
@@ -137,7 +144,7 @@ const CreateForm = () => {
         </button>
         <br />
 
-        <h3>Enter Details of the Tester :-</h3>
+        <h3 className={styles.heading}>Enter Details of the Tester :-</h3>
         <form onSubmit={handleFormSubmit}>
           <label className={styles.label}>Tester Email id:-</label>
           <input
@@ -171,6 +178,7 @@ const CreateForm = () => {
       </div>
 
       <TestTable tableData={tableData} deleteItems={deleteItems} />
+      <TestType testType={testTypeData} />
     </>
   );
 };

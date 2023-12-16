@@ -35,9 +35,21 @@
   opacity: 0.8;
 }
 .table {
-  border: 1px solid red;
+  border: 1px solid black;
   /* margin: 1% 0 15% 0; */
   margin: auto;
   margin-top: 2%;
   margin-bottom: 10%;
+}
+.tableHead tr th {
+  border: 2px solid black;
+  padding: 0.5%;
+}
+
+.tableBody tr td {
+  border: 2px solid black;
+  padding: 2%;
+  width: 6%;
+  text-align: center;
+  /* border-bottom: 2px solid black; */
 }
