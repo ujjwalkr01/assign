@@ -11,7 +11,7 @@ const CreateForm = () => {
     Tester_mobile_no: "",
     Alternative_no: "",
     type: "",
-    currDate: new Date().toLocaleString("en-GB"),
+    // currDate: ,
   });
   const [selectList, setSelectList] = useState("");
 

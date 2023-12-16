@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "../style/style.module.css";
 
 const TestTable = ({ tableData, deleteItems }) => {
@@ -18,6 +19,8 @@ const TestTable = ({ tableData, deleteItems }) => {
         return "orange";
     }
   };
+
+  let currDate = new Date().toLocaleString("en-GB");
 
   return (
     <>
@@ -45,7 +48,6 @@ const TestTable = ({ tableData, deleteItems }) => {
                 Tester_emailId,
                 Tester_mobile_no,
                 Alternative_no,
-                currDate,
               },
               indx
             ) => {
