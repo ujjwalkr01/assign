@@ -1,7 +1,16 @@
-const TestTable = ({ tableData }) => {
+import styles from "../style/style.module.css";
+
+const TestTable = ({ tableData, deleteItems }) => {
   // console.log(tableData);
+
+  // const Date = new Date();
+  // console.log(Date);
+  const deleteTheTodo = (e) => {
+    deleteItems(e.target.id);
+  };
+
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>Test Id</th>
@@ -12,6 +21,7 @@ const TestTable = ({ tableData }) => {
           <th>Alternate No.</th>
           <th>Creation Date</th>
           <th>Updation Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -19,21 +29,32 @@ const TestTable = ({ tableData }) => {
           (
             {
               Test_Name,
-              New_test,
+              type,
               Tester_emailId,
               Tester_mobile_no,
               Alternative_no,
+              currDate,
             },
             indx
           ) => {
             return (
               <tr>
-                <td>{indx+1}</td>
+                <td>{indx + 1}</td>
                 <td>{Test_Name}</td>
-                <td>{New_test}</td>
+                <td>{type}</td>
                 <td>{Tester_emailId}</td>
                 <td>{Tester_mobile_no}</td>
                 <td>{Alternative_no}</td>
+                <td>{currDate}</td>
+                <td>{currDate}</td>
+                {/* <button>edit</button> */}
+                <button
+                  className={styles.btn}
+                  id={indx}
+                  onClick={deleteTheTodo}
+                >
+                  delete
+                </button>
               </tr>
             );
           }

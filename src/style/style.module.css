@@ -37,5 +37,5 @@
 .table {
   border: 1px solid red;
   margin: auto;
-  margin-top: 1%;
+  margin: 1% 0 15% 0;
 }
