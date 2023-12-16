@@ -3,8 +3,6 @@ import styles from "../style/style.module.css";
 const TestTable = ({ tableData, deleteItems }) => {
   // console.log(tableData);
 
-  // const Date = new Date();
-  // console.log(Date);
   const deleteTheTodo = (e) => {
     deleteItems(e.target.id);
   };
